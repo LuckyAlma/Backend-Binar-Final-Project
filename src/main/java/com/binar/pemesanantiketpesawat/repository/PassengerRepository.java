@@ -1,0 +1,7 @@
+package com.binar.pemesanantiketpesawat.repository;
+
+import com.binar.pemesanantiketpesawat.model.Passenger;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PassengerRepository extends JpaRepository<Passenger, Integer> {
+}
