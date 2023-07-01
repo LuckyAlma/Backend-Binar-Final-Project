@@ -21,7 +21,9 @@ public class Seat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "seat_id")
+    @JsonIgnore
     private Integer seatId;
+    @JsonIgnore
     @Column(name = "airline_code_fk")
     private Integer airlineCodeFk;
     @Column(name = "flight_class")
