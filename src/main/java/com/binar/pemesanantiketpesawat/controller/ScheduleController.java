@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Date;
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1/schedule")
 public class ScheduleController {
