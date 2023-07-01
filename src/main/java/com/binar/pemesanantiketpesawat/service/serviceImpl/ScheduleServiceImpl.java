@@ -72,7 +72,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public Schedule updateSchedule(Schedule scheduleRequest) {
-        Schedule scheduleResponse = scheduleRepository.findByTimeId(scheduleRequest.getTimeId());
+        Schedule scheduleResponse = scheduleRepository.findByScheduleId(scheduleRequest.getScheduleId());
         if (scheduleResponse == null) return null;
         else {
             scheduleResponse.setContinentCategory(scheduleRequest.getContinentCategory());
@@ -200,7 +200,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     public List<Schedule> filterDataSearch(List<Schedule> scheduleResponse, String seat) {
         return scheduleResponse.stream()
                 .map(schedule -> new Schedule(
-                        schedule.getTimeId(),
+                        schedule.getScheduleId(),
                         schedule.getContinentCategory(),
                         schedule.getFavoriteFlight(),
                         schedule.getDepartureDate(),
@@ -210,7 +210,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                         schedule.getArrivalAirport(),
                         schedule.getSchedulesList().stream()
                                 .map(time -> new Time(
-                                        time.getScheduleId(),
+                                        time.getTimeId(),
                                         time.getDepartureDateFk(),
                                         time.getDepartureTime(),
                                         time.getArrivalTime(),

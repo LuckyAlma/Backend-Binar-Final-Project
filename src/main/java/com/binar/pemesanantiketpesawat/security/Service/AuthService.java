@@ -60,13 +60,17 @@ public class AuthService {
     }
 
     public AuthenticationResponse authenticateUser(LoginRequest loginRequest) {
+        System.out.println("AuthenticationResponse");
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
+        System.out.println("AuthenticationResponse 1");
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        System.out.println("AuthenticationResponse 2");
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
+        System.out.println("AuthenticationResponse 3");
         ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
 
 

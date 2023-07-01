@@ -80,7 +80,7 @@ class DetailServiceImplTest {
         scheduleResponse.setDepartureCity("City A");
         scheduleResponse.setArrivalCity("City B");
         scheduleResponse.setDepartureDate(java.sql.Date.valueOf(LocalDate.of(2023, Month.JUNE, 30)));
-        scheduleResponse.setTimeId(1);
+        scheduleResponse.setScheduleId(1);
 
         List<Seat> seatList = new ArrayList<>();
         seatList.add(seatResponse);
@@ -88,8 +88,8 @@ class DetailServiceImplTest {
         // Mock repository methods
         when(airlineRepository.findByAirlineCode(codeRequest)).thenReturn(airlineResponse);
         when(seatRepository.findByAirlineCodeFkAndFlightClass(airlineResponse.getAirlineId(), classResponse)).thenReturn(seatList);
-        when(timeRepository.findByScheduleId(airlineResponse.getAirlineTimeFk())).thenReturn(timeResponse);
-        when(scheduleRepository.findByTimeId(timeResponse.getDepartureDateFk())).thenReturn(scheduleResponse);
+        when(timeRepository.findByTimeId(airlineResponse.getAirlineTimeFk())).thenReturn(timeResponse);
+        when(scheduleRepository.findByScheduleId(timeResponse.getDepartureDateFk())).thenReturn(scheduleResponse);
 
         // Call the method
         DetailFlight result = detailService.getDetailPenerbangan(codeRequest, classResponse, adultsPassengers, childrenPassengers, babyPassengers);
@@ -104,8 +104,8 @@ class DetailServiceImplTest {
         // Verify that repository methods were called
         verify(airlineRepository, times(1)).findByAirlineCode(codeRequest);
         verify(seatRepository, times(1)).findByAirlineCodeFkAndFlightClass(airlineResponse.getAirlineId(), classResponse);
-        verify(timeRepository, times(1)).findByScheduleId(airlineResponse.getAirlineTimeFk());
-        verify(scheduleRepository, times(1)).findByTimeId(timeResponse.getDepartureDateFk());
+        verify(timeRepository, times(1)).findByTimeId(airlineResponse.getAirlineTimeFk());
+        verify(scheduleRepository, times(1)).findByScheduleId(timeResponse.getDepartureDateFk());
     }
 
     @Test

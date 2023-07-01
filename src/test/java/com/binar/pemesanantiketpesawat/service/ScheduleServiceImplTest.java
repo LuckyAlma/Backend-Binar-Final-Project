@@ -132,12 +132,12 @@ public class ScheduleServiceImplTest {
         String arrivalCity = "ArrivalCity";
 
         Schedule scheduleRequest = new Schedule();
-        scheduleRequest.setTimeId(timeId);
+        scheduleRequest.setScheduleId(timeId);
         scheduleRequest.setDepartureCity(departureCity);
         scheduleRequest.setArrivalCity(arrivalCity);
 
         Schedule existingSchedule = new Schedule();
-        existingSchedule.setTimeId(timeId);
+        existingSchedule.setScheduleId(timeId);
         existingSchedule.setDepartureCity("OldDepartureCity");
         existingSchedule.setArrivalCity("OldArrivalCity");
 
@@ -149,7 +149,7 @@ public class ScheduleServiceImplTest {
 
         // Verify the result
         assertNotNull(result);
-        assertEquals(timeId, result.getTimeId());
+        assertEquals(timeId, result.getScheduleId());
         assertEquals(departureCity, result.getDepartureCity());
         assertEquals(arrivalCity, result.getArrivalCity());
         verify(scheduleRepository, times(1)).findById(timeId);

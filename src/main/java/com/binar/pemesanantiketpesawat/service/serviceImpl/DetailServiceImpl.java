@@ -40,9 +40,9 @@ public class DetailServiceImpl implements DetailService {
 
         List<Seat> seatResponse = seatRepository.findByAirlineCodeFkAndFlightClass(airlineResponse.getAirlineId(), classResponse);
 
-        Time timeResponse = timeRepository.findByScheduleId(airlineResponse.getAirlineTimeFk());
+        Time timeResponse = timeRepository.findByTimeId(airlineResponse.getAirlineTimeFk());
 
-        Schedule scheduleResponse = scheduleRepository.findByTimeId(timeResponse.getDepartureDateFk());
+        Schedule scheduleResponse = scheduleRepository.findByScheduleId(timeResponse.getDepartureDateFk());
 
         Integer price = Integer.valueOf(seatResponse.get(0).getAirlinePrice());
 

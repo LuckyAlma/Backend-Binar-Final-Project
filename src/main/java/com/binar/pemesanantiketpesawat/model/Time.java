@@ -22,8 +22,9 @@ import java.util.List;
 public class Time {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "schedule_id")
-    private Integer scheduleId;
+    @Column(name = "time_id")
+    private Integer timeId;
+    @JsonIgnore
     @Column(name = "departure_date_fk")
     private Integer departureDateFk;
     @Column(name = "departure_time", nullable = false)
@@ -33,7 +34,7 @@ public class Time {
     @Column(name = "long_flight")
     private String longFlight;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "airline_time_fk", referencedColumnName = "schedule_id", insertable = true, updatable = true)
+    @JoinColumn(name = "airline_time_fk", referencedColumnName = "time_id", insertable = true, updatable = true)
     private List<Airline> airlineList;
     @JsonIgnore
     @Column(name = "created_at", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -42,8 +43,8 @@ public class Time {
     @Column(name = "modified_at", insertable = false)
     @UpdateTimestamp
     private LocalDateTime modifiedAt;
-    public Time(Integer scheduleId, Integer departureDateFk, java.sql.Time departureTime, java.sql.Time arrivalTime,String longFlight, List<Airline> airlineList) {
-        this.scheduleId = scheduleId;
+    public Time(Integer timeId, Integer departureDateFk, java.sql.Time departureTime, java.sql.Time arrivalTime,String longFlight, List<Airline> airlineList) {
+        this.timeId = timeId;
         this.departureDateFk = departureDateFk;
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;

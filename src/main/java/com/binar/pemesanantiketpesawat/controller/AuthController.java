@@ -51,9 +51,13 @@ public class AuthController {
     public CommonResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         AuthenticationResponse authenticationResponse = authService.authenticateUser(loginRequest);
 
+        System.out.println("authenticateUser");
+
         token.setToken(authenticationResponse.getJwt());
         System.out.println(authenticationResponse.getName());
         token.setUuidUser(authenticationResponse.getUuidUser());
+
+        System.out.println("authenticateUser 1");
         return crg.successResponse(token);
     }
 
