@@ -23,6 +23,7 @@ public class Airline {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "airline_id")
     private Integer airlineId;
+    @JsonIgnore
     @Column(name = "airline_time_fk")
     private Integer airlineTimeFk;
     @Column(name = "airline_name")

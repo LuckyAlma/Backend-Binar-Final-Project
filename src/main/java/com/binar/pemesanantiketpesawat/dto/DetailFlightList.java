@@ -18,7 +18,7 @@ public class DetailFlightList {
     private Date departureDate;
     private String arrivalCity;
     private Time arrivalTime;
-    private Duration longFlight;
+    private String longFlight;
     private Date arrivalDate;
     private String airlineName;
     private String airlineCode;
@@ -26,4 +26,5 @@ public class DetailFlightList {
     private Integer checkedBaggage;
     private Integer cabinBaggage;
     private String airlinePrice;
+
 }

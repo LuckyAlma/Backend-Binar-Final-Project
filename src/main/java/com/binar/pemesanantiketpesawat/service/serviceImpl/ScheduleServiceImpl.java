@@ -38,10 +38,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public List<Schedule> searchAirplaneTicketSchedule(
-            Date date, String departure, String arrival, String seat) {
-        List<Schedule> scheduleResponse =
-                scheduleRepository.findByDepartureDateAndDepartureCityAndArrivalCity(
-                        date, departure, arrival);
+            Date date, String departure, String arrival, String seat
+    ) {
+        List<Schedule> scheduleResponse = scheduleRepository.findByDepartureDateAndDepartureCityAndArrivalCity(date, departure, arrival);
+        System.out.println("size schedule: " + scheduleResponse.size());
         return filterDataSearch(scheduleResponse, seat);
     }
 
@@ -170,11 +170,11 @@ public class ScheduleServiceImpl implements ScheduleService {
                 filterDataSearch(searchAirplaneTicketSchedule(date, departure, arrival, seat), seat);
 
         List<DetailFlightList> tempDetailFlightList = new ArrayList<>();
-
         for (Schedule schedule : scheduleResponse)
             for (Time time : schedule.getSchedulesList())
                 for (Airline airline : time.getAirlineList()) {
                     for (Seat flightClass : airline.getFlightClass()) {
+
                         tempDetailFlightList.add(
                                 new DetailFlightList(
                                         schedule.getContinentCategory(),
@@ -183,7 +183,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                                         schedule.getDepartureDate(),
                                         schedule.getArrivalCity(),
                                         time.getArrivalTime(),
-                                        Duration.between(time.getDepartureTime().toLocalTime(), time.getArrivalTime().toLocalTime()),
+                                        flightDuration(time.getDepartureTime(), time.getArrivalTime()),
                                         schedule.getDepartureDate(),
                                         airline.getAirlineName(),
                                         airline.getAirlineCode(),
@@ -195,6 +195,11 @@ public class ScheduleServiceImpl implements ScheduleService {
                 }
 
         return tempDetailFlightList;
+    }
+
+    public String flightDuration(java.sql.Time departureTime, java.sql.Time arrivalTime) {
+        Duration duration= Duration.between(departureTime.toLocalTime(), arrivalTime.toLocalTime());
+        return duration.toHours() + " Hours " + duration.toMinutesPart() + " Minutes";
     }
 
     public List<Schedule> filterDataSearch(List<Schedule> scheduleResponse, String seat) {
