@@ -11,7 +11,7 @@ import java.util.List;
 @EnableJpaRepositories
 public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {
     List<Schedule> findByDepartureDateAndDepartureCityAndArrivalCity(Date date, String departure, String arrival);
-    Schedule findByTimeId(Integer waktuId);
+    Schedule findByScheduleId(Integer idRequest);
     @Query(value = "SELECT DISTINCT s.arrivalCity FROM Schedule s WHERE s.departureCity = ?1")
     List<String> findArrivalCityFromDepartureCity(String departureCity);
     @Query(value = "SELECT DISTINCT s.departureCity FROM Schedule s")

@@ -47,7 +47,7 @@ public class TimeRequestImplTest {
         timeRequest.setArrivalTime(java.sql.Time.valueOf(LocalTime.parse("12:00:00")));
 
         Schedule schedule = new Schedule();
-        schedule.setTimeId(1);
+        schedule.setScheduleId(1);
 
         when(scheduleRepository.findById(timeRequest.getDepartureDateFk())).thenReturn(Optional.of(schedule));
         when(timeRepository.save(any(Time.class))).thenReturn(new Time());
